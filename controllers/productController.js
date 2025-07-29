@@ -9,14 +9,37 @@ const showProducts = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
-const deleteProduct=async(req,res)=>{
-  try{
-    const id=req.params.id;
-    const result=req.productModel({id:id});
+
+const deleteProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await productModel.findByIdAndDelete(id);
     res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const result = await productModel.findByIdAndUpdate(id, body);
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+const createproduct = async(req,res) => {
+  try{
+    const body=req.body;
+    const result =await productModel.create(body);
+    res.status(200).json(result)
+
   }
   catch(err){
     console.log(err);
   }
-}
-export { showProducts };
+};
+
+export { showProducts, deleteProduct,updateProduct,createproduct };

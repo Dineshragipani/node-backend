@@ -1,6 +1,9 @@
-import express from "express"
-import {newOrder} from ""
-import router from "./productRoute"
-const Router =express.Router()
-Router.post("/neworder",newOrder)
-export router
+import express from "express";
+import { newOrder,showOrder } from "../controllers/orderController.js";
+
+const Router = express.Router();
+
+Router.post("/neworder", newOrder);
+Router.get("/showorder/:id",showOrder);
+
+export default Router
